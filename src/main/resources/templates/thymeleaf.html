@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>thymeleaf</title>
+    <link href="/css/index.css" rel="stylesheet"/>
+</head>
+<body>
+    <div class="container">
+        <p style="color: red; margin-left: 20px">
+			This is a paragraph!!!${msg}<h2>${msg}</h2>
+		<h2 th:text="${msg}"></h2>
+		</p>
+    </div>
+</body>
+</html>

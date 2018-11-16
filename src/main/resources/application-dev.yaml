@@ -1,0 +1,66 @@
+#http://start.spring.io/
+server: 
+  port: 8082
+  tomcat: 
+    uri-encoding: UTF-8
+eureka: 
+  instance: 
+    preferIpAddress: true
+    lease-renewal-interval-in-seconds: 5      # 心跳时间，即服务续约间隔时间（缺省为30s）
+    lease-expiration-duration-in-seconds: 10  # 发呆时间，即服务续约到期时间（缺省为90s）
+    #instance-id: ${spring.application.name}                       # 修改显示的微服务名为：应用名称
+    #instance-id: ${spring.cloud.client.ipAddress}:${server.port}  # 修改显示的微服务名为：IP:端口
+  client: 
+    #healthcheck:
+    # enabled: true                           # 开启健康检查（依赖spring-boot-starter-actuator）
+    #register-with-eureka: true
+    #fetch-registry: true
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl: 
+      #defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://127.0.0.1:8081/eureka
+spring: 
+  application: 
+    name: SpringBoot
+  datasource:
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa: 
+    properties: 
+      hibernate: 
+        hbm2ddl.auto: update
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+  freemarker: 
+    allow-request-override: false
+    cache: true
+    check-template-location: true
+    charset: UTF-8
+    content-type: text/html
+    expose-request-attributes: false
+    expose-session-attributes: false
+    expose-spring-macro-helpers: false
+    prefix: 
+    suffix: .ftl
+  thymeleaf: 
+    cache: true
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    content-type: text/html
+#当parent标签中引入的是1.4.0版本的话,一定要带上mvc；当parent标签中引入的是1.1.3版本的话,一定不要带上mvc
+  mvc: 
+    view: 
+      prefix: classpath:/templates/
+      suffix: .jsp
+
+logging: 
+  path: classpath:/log
+  level: 
+    com.favorites: DEBUG
+    org.springframework.web: INFO
+    org.hibernate: ERROR
