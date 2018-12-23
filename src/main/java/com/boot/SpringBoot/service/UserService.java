@@ -10,6 +10,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,7 @@ import com.boot.SpringBoot.dao.UserJpaSpecificationExecutor;
 import com.boot.SpringBoot.dao.UserPagingAndSortingRepository;
 import com.boot.SpringBoot.domain.User;
 import com.boot.SpringBoot.domain.enumer.Gender;
+import com.boot.SpringBoot.importcsv.CsvUtil;
 import com.boot.SpringBoot.service.itf.UserInterface;
 import com.boot.SpringBoot.utils.TimeUtils;
 
@@ -182,8 +186,20 @@ public class UserService implements UserInterface
 	{
 		Sort sort = new Sort(Direction.DESC, properties);
 		Pageable pageable = PageRequest.of(page, offset, sort);
-		userPagingAndSortingRepository.findAll(pageable);
 		return userPagingAndSortingRepository.findAll(pageable);
+	}
+
+	@Override
+	public void exportUser(HttpServletRequest request, HttpServletResponse response, int page, int offset, String properties)
+	{
+		Sort sort = new Sort(Direction.DESC, properties);
+		Pageable pageable = PageRequest.of(page, offset, sort);
+		Page<User> pageUser= userPagingAndSortingRepository.findAll(pageable);
+		
+		List<User> users = pageUser.getContent();
+		String fileName = "user.csv";//压缩包里面的文件
+		String[] header = {"序号", "名称", "地址", "电话", "生日"};
+		CsvUtil.exportData(request,response,users,fileName,header);
 	}
 
 }
