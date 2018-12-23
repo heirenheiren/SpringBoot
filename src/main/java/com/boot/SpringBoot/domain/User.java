@@ -18,7 +18,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 @Data
-@Entity
+@Entity(name="user")
 @ApiModel(value = "用户信息")
 public class User implements Serializable
 {
@@ -28,113 +28,62 @@ public class User implements Serializable
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
+	@Column(name="uid",nullable = false,unique = true, length=11)
 	@ApiModelProperty(value = "用户id", required = true) 
 	public Integer uid=1;
 	
-	@Column(nullable = false, unique = true)
+	@Column(name="uname",nullable = false,unique = true, length=36)
 	@ApiModelProperty(value = "昵称", required = true)
-	public String uname;
+	public String userName;
 	
-	@Column(nullable = false, unique = false)
-	public String upass;
+	@Column(name="upass",nullable = false,unique = true, length=32)
+	public String password;
 	
 	//@JSONField(format="YYYY-MM-dd HH:mm:ss:SS")
 	//@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	//@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-	private Date birthday;
+	@Column(name="birthday")
+	private Date birthDay;
 	
+	@Column(name="address", length=100)
 	private String address;
 	
+	@Column(name="gender", length=1)
+	private int gender;
+	
+	@Column(name="tel",length=11)
 	private String tel;
 	
-	private Gender gender;
+	@Column(name="createby",nullable = false,length=6)
+	private String createBy;
+	
+	@Column(name="updateby",nullable = false,length=6)
+	private String updateBy;
+	
+	@Column(name="createdate",nullable = false)
+	private Date createDate;
+	
+	@Column(name="updatedate",nullable = false)
+	private Date updateDate;
 	
 	public User()
 	{
 		super();
 	}
-	public User(String uname, String upass)
-	{
-		super();
-		this.uname = uname;
-		this.upass = upass;
-	}
-	public User(Integer uid, String uname, String upass)
+
+	public User(Integer uid, String userName, String password)
 	{
 		super();
 		this.uid = uid;
-		this.uname = uname;
-		this.upass = upass;
+		this.userName = userName;
+		this.password = password;
 	}
-	
-	public User(String uname, String upass, Date birthday)
+
+	public User(String userName, String password)
 	{
 		super();
-		this.uname = uname;
-		this.upass = upass;
-		this.birthday = birthday;
-	}
-	public int getUid()
-	{
-		return uid;
-	}
-	public void setUid(Integer uid)
-	{
-		this.uid = uid;
-	}
-	public String getUname()
-	{
-		return uname;
-	}
-	public void setUname(String uname)
-	{
-		this.uname = uname;
-	}
-	public String getUpass()
-	{
-		return upass;
-	}
-	public void setUpass(String upass)
-	{
-		this.upass = upass;
-	}
-	public Date getBirthday()
-	{
-		return birthday;
-	}
-	public void setBirthday(Date birthday)
-	{
-		this.birthday = birthday;
-	}
-	public String getAddress()
-	{
-		return address;
-	}
-	public void setAddress(String address)
-	{
-		this.address = address;
-	}
-	public String getTel()
-	{
-		return tel;
-	}
-	public void setTel(String tel)
-	{
-		this.tel = tel;
-	}
-	public Gender getGender()
-	{
-		return gender;
-	}
-	public void setGender(Gender gender)
-	{
-		this.gender = gender;
-	}
-	@Override
-	public String toString()
-	{
-		return "User [uid=" + uid + ", uname=" + uname + ", upass=" + upass + ", birthday=" + birthday + ", address="
-				+ address + ", tel=" + tel + ", gender=" + gender + "]";
+		this.userName = userName;
+		this.password = password;
 	}
 	
 }

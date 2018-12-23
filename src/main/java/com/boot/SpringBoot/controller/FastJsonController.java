@@ -20,9 +20,9 @@ public class FastJsonController
 		User user = new User();
 
 		user.setUid(1);
-		user.setUname("jack");
-		user.setUpass("jack123");
-		user.setBirthday(new Date());
+		user.setUserName("jack");
+		user.setPassword("jack123");
+		user.setBirthDay(new Date());
 
 		// 模拟异常
         //int i = 1/0;

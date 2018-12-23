@@ -24,7 +24,7 @@ spring:
   application: 
     name: SpringBoot
   datasource:
-    url: jdbc:mysql://localhost:3306/test
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&rewriteBatched-Statements=true&useServerPrepStmts=false
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver

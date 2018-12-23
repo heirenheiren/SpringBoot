@@ -79,9 +79,15 @@ public class RestFulController
 	}
 
 	@RequestMapping("/batchSaveUser")
-	public User batchSaveUser()
+	public void batchSaveUser()
 	{
-		return userService.batchSaveUser();
+		userService.batchSaveUser();
+	}
+	
+	@RequestMapping("/jdbcSaveUser")
+	public void jdbcSaveUser()
+	{
+		userService.jdbcSaveUser();
 	}
 	
 	@RequestMapping(value = "/saveUser", method = RequestMethod.POST)
@@ -96,10 +102,10 @@ public class RestFulController
 			@PathVariable("id") Integer id)
 	{
 		User user = new User();
-		user.setUname(category);
+		user.setUserName(category);
 		user.setUid(id);
-		user.setUpass(brand);
-		user.setGender(Gender.NEUTER);
+		user.setPassword(brand);
+		user.setGender(Gender.NEUTER.getValue());
 		return user;
 	}
 

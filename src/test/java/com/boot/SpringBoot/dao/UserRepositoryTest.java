@@ -17,7 +17,7 @@ import com.boot.SpringBoot.domain.User;
 public class UserRepositoryTest
 {
 	@Autowired
-	private UserRepository userRepository;
+	private UserJpaRepository userJpaRepository;
 	@Test
 	public void test()
 	{
@@ -26,17 +26,17 @@ public class UserRepositoryTest
 		String formattedDate = dateFormat.format(date);
 		System.out.println(formattedDate);
 		
-//		userRepository.save(new User("cc", Math.random()+""));
-		userRepository.save(new User("bb", Math.random()+""));
-//		List<User> listUser = userRepository.findAll();
+//		userJpaRepository.save(new User("cc", Math.random()+""));
+		userJpaRepository.save(new User("bb", Math.random()+""));
+//		List<User> listUser = userJpaRepository.findAll();
 //		for (User user : listUser)
 //		{
 //			System.out.println(user.getUname());
 //		}
-//		Assert.assertEquals(userRepository.count(), userRepository.findAll().size());
-//		Assert.assertEquals("bb", userRepository.findByUnameOrUpass("bb", "aa123456").getUname());
-		//userRepository.delete(userRepository.findByUname("aa"));
-		//userRepository.delete(userRepository.findByUname("bb"));
+//		Assert.assertEquals(userJpaRepository.count(), userRepository.findAll().size());
+//		Assert.assertEquals("bb", userJpaRepository.findByUnameOrUpass("bb", "aa123456").getUname());
+		//userJpaRepository.delete(userJpaRepository.findByUname("aa"));
+		//userJpaRepository.delete(userJpaRepository.findByUname("bb"));
 	}
 
 }
